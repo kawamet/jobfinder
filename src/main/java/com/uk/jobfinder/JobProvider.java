@@ -36,10 +36,8 @@ public class JobProvider {
         HttpEntity httpEntity = new HttpEntity(httpHeaders);
 
         ResponseEntity<Job> exchange = restTemplate.exchange(URL, HttpMethod.GET, httpEntity, Job.class);
-        exchange.getBody().getResults().forEach(System.out::println);
-        List<Result> results = exchange.getBody().getResults();
 
-        return results;
+        return exchange.getBody().getResults();
 
     }
 

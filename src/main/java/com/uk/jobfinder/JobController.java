@@ -4,6 +4,7 @@ import com.uk.jobfinder.model.Result;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -32,6 +33,15 @@ public class JobController extends VerticalLayout {
 
         Button buttonSubmit = new Button("Submit", new Icon(VaadinIcon.SELECT));
         buttonSubmit.setIconAfterText(true);
+
+        Button buttonSubscribe = new Button("Subscribe!");
+        Label labelSubscribe = new Label("add email");
+
+        buttonSubmit.addClickListener(click->{
+
+
+        });
+
 
         buttonSubmit.addClickListener(click -> {
 
