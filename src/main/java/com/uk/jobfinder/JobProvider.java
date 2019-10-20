@@ -17,22 +17,26 @@ import java.util.List;
 @RestController
 public class JobProvider {
 
-    String url = "https://www.reed.co.uk/api/1.0/search?keywords=accountant&location=london&distancefromlocation=1&jobId=39080480&employerId=485927";
+    //String URL = "https://www.reed.co.uk/api/1.0/search?keywords=accountant&location=london&distancefromlocation=1&jobId=39080480&employerId=485927";
+    //private static final String URL ="https://www.reed.co.uk/api/1.0/search?keywords=java&location=london&distancefromlocation=5";
 
-    @EventListener(ApplicationReadyEvent.class)
-    public List<Result> getJobs() {
+
+    //    @EventListener(ApplicationReadyEvent.class)
+    public List<Result> getJobs(String keywords, String location) {
+
+        String URL = "https://www.reed.co.uk/api/1.0/search?keywords=" +
+                keywords +
+                "&distancefromlocation=5&locationname=" +
+                location;
+
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", "Basic ZGY0YjE0ZjktNmQ2Yy00MzBiLWI3MGUtOGEwZjdiY2Q5YmI0Og==");
-
         HttpEntity httpEntity = new HttpEntity(httpHeaders);
 
-        ResponseEntity<Job> exchange = restTemplate.exchange(url, HttpMethod.GET, httpEntity, Job.class);
-
-        //To do delete
+        ResponseEntity<Job> exchange = restTemplate.exchange(URL, HttpMethod.GET, httpEntity, Job.class);
         exchange.getBody().getResults().forEach(System.out::println);
-
         List<Result> results = exchange.getBody().getResults();
 
         return results;

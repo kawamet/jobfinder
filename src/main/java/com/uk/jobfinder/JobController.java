@@ -12,10 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+
 @Route("show-all")
 public class JobController extends VerticalLayout {
 
     JobProvider jobProvider;
+    Grid<Result> grid;
+    List<Result> jobs;
 
     @Autowired
     public JobController(JobProvider jobProvider) {
@@ -30,14 +33,21 @@ public class JobController extends VerticalLayout {
         Button buttonSubmit = new Button("Submit", new Icon(VaadinIcon.SELECT));
         buttonSubmit.setIconAfterText(true);
 
+        buttonSubmit.addClickListener(click -> {
 
-        List<Result> jobs = jobProvider.getJobs();
-        Grid<Result> grid = new Grid<>(Result.class);
-        grid.setItems(jobs);
-        grid.setColumns("employerName", "jobTitle", "locationName", "minimumSalary",
-                "maximumSalary", "currency", "jobDescription", "applications", "jobUrl");
+            jobs = jobProvider.getJobs(comboBoxJob.getValue(), comboBoxCity.getValue());
+            grid = new Grid<>(Result.class);
+            grid.setItems(jobs);
+            grid.setColumns("employerName", "jobTitle", "locationName", "minimumSalary",
+                    "maximumSalary", "currency", "jobDescription", "applications", "jobUrl");
 
-        add(comboBoxCity, comboBoxJob,buttonSubmit, grid);
+            add(grid);
+
+
+        });
+
+
+        add(comboBoxCity, comboBoxJob, buttonSubmit);
 
     }
 
