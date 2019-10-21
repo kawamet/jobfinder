@@ -1,4 +1,4 @@
-package com.uk.jobfinder.model;
+package com.uk.jobfinder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -29,4 +29,6 @@ public class MailService {
         mimeMessageHelper.setText(text, isHtmlContent);
         javaMailSender.send(mimeMessage);
     }
+
+
 }
