@@ -12,12 +12,16 @@ public class Email {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
+    private String city;
+    private String jobPosition;
 
     public Email() {
     }
 
-    public Email(String email) {
+    public Email(String email, String city, String jobPosition) {
         this.email = email;
+        this.city = city;
+        this.jobPosition = jobPosition;
 
     }
 
@@ -37,4 +41,19 @@ public class Email {
         this.email = email;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getJobPosition() {
+        return jobPosition;
+    }
+
+    public void setJobPosition(String jobPosition) {
+        this.jobPosition = jobPosition;
+    }
 }
