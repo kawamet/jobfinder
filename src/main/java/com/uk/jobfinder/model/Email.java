@@ -1,4 +1,4 @@
-package com.uk.jobfinder;
+package com.uk.jobfinder.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

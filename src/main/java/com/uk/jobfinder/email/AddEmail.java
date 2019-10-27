@@ -1,5 +1,6 @@
-package com.uk.jobfinder;
+package com.uk.jobfinder.email;
 
+import com.uk.jobfinder.model.Email;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -24,7 +25,7 @@ public class AddEmail extends VerticalLayout {
         comboBoxJobPosition = new ComboBox<>("Select job position");
         comboBoxJobPosition.setItems("Senior Java", "Java", "Junior Java", "Graduate Java", "Academy Java");
 
-        Button button = new Button("Save");
+        Button button = new Button("Save!");
 
         button.addClickListener(buttonClickEvent -> {
             Email email = new Email(textFieldEmail.getValue(), comboBoxCity.getValue(), comboBoxJobPosition.getValue());

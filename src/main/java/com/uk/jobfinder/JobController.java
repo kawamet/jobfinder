@@ -1,27 +1,21 @@
 package com.uk.jobfinder;
 
 import com.uk.jobfinder.model.Result;
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
-import com.vaadin.flow.data.renderer.TemplateRenderer;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.shared.Registration;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 
 @Route("show-all")
@@ -35,15 +29,13 @@ public class JobController extends VerticalLayout {
     ComboBox<String> comboBoxCity;
     ComboBox<String> comboBoxJob;
     Button buttonSubmit;
-    Button buttonSubscribe;
-    Label labelSubscribe;
+    Anchor anchorSubscribe;
+
 
     @Autowired
     public JobController(JobProvider jobProvider) {
         this.jobProvider = jobProvider;
 
-
-        //jobProvider.getAllJobs().stream().map(e -> e.getMinimumSalary()).forEach(System.out:: println);
 
         comboBoxCity = new ComboBox<String>("City");
         comboBoxCity.setItems("London", "Birmingham", "Manchester", "Glasgow", "Newcastle", "Sheffield", "Liverpool", "Leeds");
@@ -54,13 +46,9 @@ public class JobController extends VerticalLayout {
         buttonSubmit = new Button("Submit", new Icon(VaadinIcon.SELECT));
         buttonSubmit.setIconAfterText(true);
 
-        buttonSubscribe = new Button("Subscribe!");
-        labelSubscribe = new Label("add email");
+        anchorSubscribe = new Anchor("/add-email");
+        anchorSubscribe.setText("Subscribe!");
 
-        buttonSubscribe.addClickListener(click -> {
-            //todo add to database
-
-        });
 
         final int[] count = {0};
         buttonSubmit.addClickListener(click -> {
@@ -79,13 +67,11 @@ public class JobController extends VerticalLayout {
 
             showDialogWithJobDescription();
 
-
             add(grid);
 
         });
 
-
-        add(comboBoxCity, comboBoxJob, buttonSubmit);
+        add(comboBoxCity, comboBoxJob, buttonSubmit, anchorSubscribe);
 
     }
 
