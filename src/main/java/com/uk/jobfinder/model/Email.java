@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
 public class Email {
@@ -14,14 +15,16 @@ public class Email {
     private String email;
     private String city;
     private String jobPosition;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    public Email() {
-    }
+    public Email(String email, String city, String jobPosition, LocalDate startDate, LocalDate endDate) {
 
-    public Email(String email, String city, String jobPosition) {
         this.email = email;
         this.city = city;
         this.jobPosition = jobPosition;
+        this.startDate = startDate;
+        this.endDate = endDate;
 
     }
 
@@ -55,5 +58,21 @@ public class Email {
 
     public void setJobPosition(String jobPosition) {
         this.jobPosition = jobPosition;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 }
