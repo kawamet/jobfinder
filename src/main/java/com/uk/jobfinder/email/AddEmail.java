@@ -2,6 +2,7 @@ package com.uk.jobfinder.email;
 
 import com.uk.jobfinder.model.Email;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -30,6 +31,10 @@ public class AddEmail extends VerticalLayout {
         EmailField textFieldEmail = new EmailField ("Enter your email address");
         textFieldEmail.setClearButtonVisible(true);
         textFieldEmail.setErrorMessage("Please enter a valid email address");
+        Checkbox checkboxAgreement = new Checkbox();
+        checkboxAgreement.setLabel("I declare that I have read and understood JavaJobFinder privacy policy.");
+        Checkbox checkboxOffers = new Checkbox();
+        checkboxOffers.setLabel(" I consent to receive promotional offers from JavaJobFinder.");
 
         comboBoxCity = new ComboBox<>("Select a city");
         comboBoxCity.setItems("London", "Birmingham", "Manchester", "Glasgow", "Newcastle", "Sheffield", "Liverpool", "Leeds", "Wimbledon");
