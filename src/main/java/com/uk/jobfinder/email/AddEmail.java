@@ -19,8 +19,6 @@ public class AddEmail extends VerticalLayout {
     private EmailRepo emailRepo;
     private ComboBox<String> comboBoxCity;
     private ComboBox<String> comboBoxJobPosition;
-    //private Checkbox checkboxAgreement;
-    //private Checkbox checkboxOffers;
     private Dialog dialogEmpty;
 
     @Autowired
@@ -34,8 +32,6 @@ public class AddEmail extends VerticalLayout {
         checkboxAgreement.setLabel("I declare that I have read and understood JavaJobFinder privacy policy.");
         Checkbox checkboxOffers = new Checkbox();
         checkboxOffers.setLabel(" I consent to receive promotional offers from JavaJobFinder.");
-
-        Button confirmationButton = new Button();
 
         comboBoxCity = new ComboBox<>("Select a city");
         comboBoxCity.setItems("London", "Birmingham", "Manchester", "Glasgow", "Newcastle", "Sheffield", "Liverpool", "Leeds", "Wimbledon");
@@ -57,9 +53,9 @@ public class AddEmail extends VerticalLayout {
                         checkboxAgreement.getValue(), checkboxOffers.getValue());
                 emailRepo.save(email);
 
-
                 Dialog dialog = new Dialog();
-                dialog.add(new Label("Your email has been saved to our database. We will contact you as soon as we get new offers."));
+                dialog.add(new Label("Your email has been saved to our database. We will contact you as soon as we " +
+                        "get new offers."));
                 dialog.setWidth("250px");
                 dialog.setHeight("150px");
 
