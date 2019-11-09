@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
 
 @Entity
 public class Email {
@@ -15,12 +14,16 @@ public class Email {
     private String email;
     private String city;
     private String jobPosition;
+    private Boolean checkboxAgreement;
+    private Boolean checkboxOffers;
 
-    public Email(String email, String city, String jobPosition) {
+    public Email(String email, String city, String jobPosition, Boolean checkboxAgreement, Boolean checkboxOffers) {
 
         this.email = email;
         this.city = city;
         this.jobPosition = jobPosition;
+        this.checkboxAgreement = checkboxAgreement;
+        this.checkboxOffers = checkboxOffers;
 
     }
 
@@ -56,5 +59,12 @@ public class Email {
         this.jobPosition = jobPosition;
     }
 
+    public Boolean getCheckboxAgreement() {return  checkboxAgreement; }
+
+    public void setCheckboxAgreement() { this.checkboxOffers = checkboxAgreement; }
+
+    public Boolean getCheckboxOffers() {return  checkboxOffers; }
+
+    public void setCheckboxOffers() { this.checkboxAgreement = checkboxOffers; }
 
 }
