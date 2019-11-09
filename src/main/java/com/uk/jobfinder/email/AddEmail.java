@@ -28,7 +28,7 @@ public class AddEmail extends VerticalLayout {
         this.emailRepo = emailRepo;
 
         //add(new Image("https://media.giphy.com/media/qgWV7ZjRbL1h6/giphy.gif", "SORRY, image is not available :-("));
-        EmailField textFieldEmail = new EmailField ("Enter your email address");
+        EmailField textFieldEmail = new EmailField("Enter your email address");
         textFieldEmail.setClearButtonVisible(true);
         textFieldEmail.setErrorMessage("Please enter a valid email address");
         Checkbox checkboxAgreement = new Checkbox();
@@ -46,18 +46,18 @@ public class AddEmail extends VerticalLayout {
 
         button.addClickListener(buttonClickEvent -> {
 
-            if (textFieldEmail.isEmpty() || comboBoxCity.isEmpty() || comboBoxJobPosition.isEmpty()){
+            if (textFieldEmail.isEmpty() || comboBoxCity.isEmpty() || comboBoxJobPosition.isEmpty()) {
                 dialogEmpty = new Dialog();
                 dialogEmpty.add(new Label("Field cannot be empty!!!"));
                 dialogEmpty.open();
                 add(dialogEmpty);
-            }else {
+            } else {
                 Email email = new Email(textFieldEmail.getValue(), comboBoxCity.getValue(), comboBoxJobPosition.getValue());
                 emailRepo.save(email);
                 add("Your email has been saved to our database. We will contact you as soon as we get new offers.");
             }
         });
 
-        add(textFieldEmail, comboBoxCity, comboBoxJobPosition, button);
+        add(textFieldEmail, comboBoxCity, comboBoxJobPosition, button, checkboxAgreement, checkboxOffers);
     }
 }
