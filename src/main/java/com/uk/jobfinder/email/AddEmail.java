@@ -7,9 +7,9 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,13 +21,13 @@ public class AddEmail extends VerticalLayout {
     private ComboBox<String> comboBoxCity;
     private ComboBox<String> comboBoxJobPosition;
     private Dialog dialogEmpty;
+    private Dialog confirmationDialog;
 
 
     @Autowired
     public AddEmail(EmailRepo emailRepo) {
         this.emailRepo = emailRepo;
 
-        //add(new Image("https://media.giphy.com/media/qgWV7ZjRbL1h6/giphy.gif", "SORRY, image is not available :-("));
         EmailField textFieldEmail = new EmailField("Enter your email address");
         textFieldEmail.setClearButtonVisible(true);
         textFieldEmail.setErrorMessage("Please enter a valid email address");
@@ -36,11 +36,15 @@ public class AddEmail extends VerticalLayout {
         Checkbox checkboxOffers = new Checkbox();
         checkboxOffers.setLabel(" I consent to receive promotional offers from JavaJobFinder.");
 
+
+        Button confirmationButton = new Button();
+
         comboBoxCity = new ComboBox<>("Select a city");
         comboBoxCity.setItems("London", "Birmingham", "Manchester", "Glasgow", "Newcastle", "Sheffield", "Liverpool", "Leeds", "Wimbledon");
 
         comboBoxJobPosition = new ComboBox<>("Select job position");
         comboBoxJobPosition.setItems("Senior Java", "Java", "Junior Java", "Graduate Java", "Academy Java");
+
 
         Button button = new Button("Save!");
 
@@ -48,16 +52,28 @@ public class AddEmail extends VerticalLayout {
 
             if (textFieldEmail.isEmpty() || comboBoxCity.isEmpty() || comboBoxJobPosition.isEmpty()) {
                 dialogEmpty = new Dialog();
-                dialogEmpty.add(new Label("Field cannot be empty!!!"));
+                dialogEmpty.add(new Label("Field/s cannot be empty!!!"));
                 dialogEmpty.open();
                 add(dialogEmpty);
             } else {
                 Email email = new Email(textFieldEmail.getValue(), comboBoxCity.getValue(), comboBoxJobPosition.getValue());
                 emailRepo.save(email);
-                add("Your email has been saved to our database. We will contact you as soon as we get new offers.");
+
+
+                Dialog dialog = new Dialog();
+                dialog.add(new Label("Your email has been saved to our database. We will contact you as soon as we get new offers."));
+                dialog.setWidth("250px");
+                dialog.setHeight("150px");
+
+                Button confirmButton = new Button("Fantastic!", event -> {
+                    dialog.close();
+                });
+                dialog.add(confirmButton);
+
+                dialog.open();
             }
         });
 
-        add(textFieldEmail, comboBoxCity, comboBoxJobPosition, button, checkboxAgreement, checkboxOffers);
+        add(textFieldEmail, comboBoxCity, comboBoxJobPosition, checkboxAgreement, checkboxOffers, button);
     }
 }
