@@ -21,8 +21,8 @@ public class AddEmail extends VerticalLayout {
     private EmailRepo emailRepo;
     private ComboBox<String> comboBoxCity;
     private ComboBox<String> comboBoxJobPosition;
-    private DatePicker startDatePicker;
-    private DatePicker endDatePicker;
+    //private DatePicker startDatePicker;
+    //private DatePicker endDatePicker;
     private TextComponent message;
 
     @Autowired
@@ -38,63 +38,14 @@ public class AddEmail extends VerticalLayout {
         comboBoxJobPosition = new ComboBox<>("Select job position");
         comboBoxJobPosition.setItems("Senior Java", "Java", "Junior Java", "Graduate Java", "Academy Java");
 
-//        DatePicker startDatePicker = new DatePicker();
-//        startDatePicker.setLabel("Start");
-//        startDatePicker.setValue(LocalDate.now());
-//        DatePicker endDatePicker = new DatePicker();
-//        endDatePicker.setLabel("End");
-//        endDatePicker.setValue(LocalDate.now());
-//
-//        startDatePicker.addValueChangeListener(event -> {
-//            LocalDate selectedDate = event.getValue();
-//            LocalDate endDate = endDatePicker.getValue();
-//            if (selectedDate != null) {
-//                endDatePicker.setMin(selectedDate.plusDays(1));
-//                if (endDate == null) {
-//                    endDatePicker.setOpened(true);
-//                    message.setText("Select the ending date");
-//                } else {
-//                    message.setText(
-//                            "Selected period:\nFrom " + selectedDate.toString()
-//                                    + " to " + endDate.toString());
-//                }
-//            } else {
-//                endDatePicker.setMin(null);
-//                message.setText("Select the starting date");
-//            }
-//        });
-//
-//        endDatePicker.addValueChangeListener(event -> {
-//            LocalDate selectedDate = event.getValue();
-//            LocalDate startDate = startDatePicker.getValue();
-//            if (selectedDate != null) {
-//                startDatePicker.setMax(selectedDate.minusDays(1));
-//                if (startDate != null) {
-//                    message.setText(
-//                            "Selected period:\nFrom " + startDate.toString()
-//                                    + " to " + selectedDate.toString());
-//                } else {
-//                    message.setText("Select the starting date");
-//                }
-//            } else {
-//                startDatePicker.setMax(null);
-//                if (startDate != null) {
-//                    message.setText("Select the ending date");
-//                } else {
-//                    message.setText("No date is selected");
-//                }
-//            }
-//        });
-
         Button button = new Button("Save!");
 
         button.addClickListener(buttonClickEvent -> {
-            Email email = new Email(textFieldEmail.getValue(), comboBoxCity.getValue(), comboBoxJobPosition.getValue(),
-                    startDatePicker.getValue(), endDatePicker.getValue());
+            Email email = new Email(textFieldEmail.getValue(), comboBoxCity.getValue(), comboBoxJobPosition.getValue());
             emailRepo.save(email);
             add("Your email has been saved to our database. We will contact you as soon as we get new offers.");
         });
 
-        add(textFieldEmail, comboBoxCity, comboBoxJobPosition, startDatePicker, endDatePicker, button);
+        add(textFieldEmail, comboBoxCity, comboBoxJobPosition, button);
     }
 }
