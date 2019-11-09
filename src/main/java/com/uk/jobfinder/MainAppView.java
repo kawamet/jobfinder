@@ -33,6 +33,8 @@ class MainAppView extends AppLayout {
         Tabs tabs = new Tabs(new Tab("Job Search"), new Tab("Subscribe"), new Tab("Unsubscribe"));
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         addToDrawer(tabs);
+
+
     }
 }
 
