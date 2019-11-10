@@ -1,6 +1,6 @@
 ![Image of JobSearch](https://bit.ly/2Q3RwK0)
 
-##JavaJobFinder - job searching app. 
+## JavaJobFinder - job searching app. 
 
 ## Table of contents
 * [General info](#general-info)
@@ -29,5 +29,3 @@ Job search app written with:
 * [Magdalena Jankowska](https://github.com/MagdaJank)
 * [Kamil Lesiński](https://github.com/Kamilesinski)
 * [Mateusz Zagrzejewski](https://github.com/Moskiewski)
-
-@London 2019
