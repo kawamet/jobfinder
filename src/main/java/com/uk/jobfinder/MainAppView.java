@@ -34,23 +34,28 @@ class MainAppView extends AppLayout {
     AddEmail addEmail;
     JobController jobController;
     Image img;
+    Image imgLupa;
     HorizontalLayout horizontalLayout;
+    Label label;
+
 
     @Autowired
     public MainAppView(JobProvider jobProvider, EmailRepo emailRepo) {
         img = new Image("https://i.imgur.com/maqwQwL.jpg", "JavaJobFinder");
         img.setMaxHeight("400px");
+        imgLupa = new Image("https://i.imgur.com/D5Fff4j.jpg", "JavaJobFinder");
+        imgLupa.setMaxHeight("70px");
         this.jobProvider = jobProvider;
 
-        Label label = new Label("\n JavaJobFinder is the ultimate tool that will help you land your dream job as java developer " +
+        label = new Label("\n JavaJobFinder is the ultimate tool that will help you land your dream job as java developer " +
                 "on any level you want. \n" +
                 "We use best job search available and we promise to deliver the most suitable job offers directly to your inbox. So \n" +
                 "do not hesitate and subscribe to our newsletter today. ");
 
-
+        setContent(horizontalLayout);
         horizontalLayout = new HorizontalLayout();
         horizontalLayout.add(img, label);
-        addToNavbar(new DrawerToggle(), img, label);
+        addToNavbar(new DrawerToggle(), imgLupa);
         jobController = new JobController(jobProvider);
         addEmail = new AddEmail(emailRepo);
 
@@ -60,16 +65,17 @@ class MainAppView extends AppLayout {
             final Tab selectedTab = event.getSelectedTab();
             String label1 = selectedTab.getLabel();
             if (label1.equals("Find Job")) {
-                remove(img, label, jobController, addEmail);
-                addToNavbar(jobController);
+                remove(jobController, addEmail, horizontalLayout);
+                setContent(jobController);
             }
             if (label1.equals("Subscribe")) {
-                remove(img, label, jobController, addEmail);
-                addToNavbar(addEmail);
+                remove(jobController, addEmail,horizontalLayout);
+                setContent(addEmail);
             }
             if (label1.equals("Main")) {
-                remove(img, label, jobController, addEmail);
-                addToNavbar(img, label);
+                remove(jobController, addEmail, horizontalLayout);
+                setContent(horizontalLayout);
+                //setContent(label);
             }
         });
 
