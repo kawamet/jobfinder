@@ -1,5 +1,7 @@
 package com.uk.jobfinder;
 
+import com.uk.jobfinder.email.AddEmail;
+import com.uk.jobfinder.email.EmailRepo;
 import com.uk.jobfinder.model.Result;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -29,12 +31,14 @@ import java.util.Set;
 @PWA(name = "JavaJobFinder", shortName = "OurApp")
 class MainAppView extends AppLayout {
     JobProvider jobProvider;
-    Grid<Result> grid;
-    Dialog dialogJobDescription;
+    AddEmail addEmail;
+    JobController jobController;
+    Image img;
+    HorizontalLayout horizontalLayout;
 
     @Autowired
-    public MainAppView(JobProvider jobProvider) {
-        Image img = new Image("https://i.imgur.com/maqwQwL.jpg", "JavaJobFinder");
+    public MainAppView(JobProvider jobProvider, EmailRepo emailRepo) {
+        img = new Image("https://i.imgur.com/maqwQwL.jpg", "JavaJobFinder");
         img.setHeight("400px");
         this.jobProvider = jobProvider;
 
@@ -44,26 +48,33 @@ class MainAppView extends AppLayout {
                 "do not hesitate and subscribe to our newsletter today. ");
 
 
-        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout = new HorizontalLayout();
         horizontalLayout.add(img, label);
         addToNavbar(new DrawerToggle(), img, label);
+        jobController = new JobController(jobProvider);
+        addEmail = new AddEmail(emailRepo);
 
-        Tabs tabs = new Tabs(new Tab("Find Job"), new Tab("Subscribe"), new Tab("Unsubscribe"));
+        Tabs tabs = new Tabs(new Tab("Main"), new Tab("Find Job"), new Tab("Subscribe"), new Tab("API documentation"));
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         tabs.addSelectedChangeListener(event -> {
             final Tab selectedTab = event.getSelectedTab();
             String label1 = selectedTab.getLabel();
             if (label1.equals("Find Job")) {
-                JobController jobController = new JobController(jobProvider);
-                VerticalLayout test1 = jobController;
-                remove(img, label);
-                addToNavbar(test1);
+                remove(img, label, jobController ,addEmail);
+                addToNavbar(jobController);
+            }
+            if (label1.equals("Subscribe")) {
+                remove(img, label, jobController, addEmail);
+                addToNavbar(addEmail);
+            }
+            if (label1.equals("Main")) {
+                remove(img, label, jobController, addEmail);
+                addToNavbar(img, label);
             }
         });
 
         addToDrawer(tabs);
 
     }
-
 }
 
