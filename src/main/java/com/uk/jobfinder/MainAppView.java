@@ -1,5 +1,7 @@
 package com.uk.jobfinder;
 
+import com.uk.jobfinder.email.AddEmail;
+import com.uk.jobfinder.email.EmailRepo;
 import com.uk.jobfinder.model.Result;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -31,9 +33,12 @@ class MainAppView extends AppLayout {
     JobProvider jobProvider;
     Grid<Result> grid;
     Dialog dialogJobDescription;
+    AddEmail addEmail;
+    JobController jobController;
+    EmailRepo emailRepo;
 
     @Autowired
-    public MainAppView(JobProvider jobProvider) {
+    public MainAppView(JobProvider jobProvider, EmailRepo emailRepo) {
         Image img = new Image("https://i.imgur.com/maqwQwL.jpg", "JavaJobFinder");
         img.setHeight("400px");
         this.jobProvider = jobProvider;
@@ -47,6 +52,8 @@ class MainAppView extends AppLayout {
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.add(img, label);
         addToNavbar(new DrawerToggle(), img, label);
+        jobController = new JobController(jobProvider);
+        addEmail = new AddEmail(emailRepo);
 
         Tabs tabs = new Tabs(new Tab("Find Job"), new Tab("Subscribe"), new Tab("Unsubscribe"));
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
@@ -54,10 +61,12 @@ class MainAppView extends AppLayout {
             final Tab selectedTab = event.getSelectedTab();
             String label1 = selectedTab.getLabel();
             if (label1.equals("Find Job")) {
-                JobController jobController = new JobController(jobProvider);
-                VerticalLayout test1 = jobController;
-                remove(img, label);
-                addToNavbar(test1);
+                remove(img, label, jobController ,addEmail);
+                addToNavbar(jobController);
+            }
+            if (label1.equals("Subscribe")) {
+                remove(img, label, jobController, addEmail);
+                addToNavbar(addEmail);
             }
         });
 
