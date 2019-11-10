@@ -17,7 +17,8 @@ Spring Boot 2.2.0 and MySQL as backend and Vaadin as frontend.
 
 ## Technologies:
 
-Job search app written with:
+App uses following technologies: 
+
 * [Java 8](https://bit.ly/2KmlCov) 
 * [Spring Boot](https://spring.io/projects/spring-boot), 
 * [MySQL](https://remotemysql.com/)  
