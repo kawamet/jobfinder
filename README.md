@@ -2,7 +2,7 @@
 
 JavaJobFinder - job searching app. 
 
-## Table of contents
+## Table of contents:
 
 * [General info](#general-info)
 * [Technologies](#technologies)
