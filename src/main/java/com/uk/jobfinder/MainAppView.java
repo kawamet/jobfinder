@@ -37,7 +37,7 @@ class MainAppView extends AppLayout {
         addEmail = new AddEmail(emailRepo);
         img = new Image("https://i.imgur.com/maqwQwL.jpg", "JavaJobFinder");
         img.setMaxHeight("400px");
-        imgLupa = new Image("https://i.imgur.com/D5Fff4j.jpg", "JavaJobFinder");
+        imgLupa = new Image("https://i.imgur.com/BgySz0z.png", "JavaJobFinder");
         imgLupa.setMaxHeight("50px");
 
         label = new Label("\n JavaJobFinder is the ultimate tool that will help you land your dream job as java developer " +
