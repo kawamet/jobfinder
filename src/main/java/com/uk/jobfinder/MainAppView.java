@@ -14,6 +14,7 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @StyleSheet("/css/style.css")
@@ -29,13 +30,14 @@ class MainAppView extends AppLayout {
     Image imgLupa;
     HorizontalLayout horizontalLayout;
     Label label;
+    PasswordEncoder passwordEncoder;
 
 
     @Autowired
     public MainAppView(JobProvider jobProvider, EmailRepo emailRepo) {
         this.jobProvider = jobProvider;
         jobController = new JobController(jobProvider);
-        addEmail = new AddEmail(emailRepo);
+        addEmail = new AddEmail(emailRepo, passwordEncoder);
         img = new Image("https://i.imgur.com/maqwQwL.jpg", "JavaJobFinder");
         img.setMaxHeight("400px");
         imgLupa = new Image("https://i.imgur.com/BgySz0z.png", "JavaJobFinder");

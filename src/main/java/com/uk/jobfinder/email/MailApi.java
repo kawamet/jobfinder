@@ -5,6 +5,7 @@ import com.uk.jobfinder.model.Email;
 import com.uk.jobfinder.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.mail.MessagingException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,48 +23,53 @@ public class MailApi {
 
     @Value("${APLICATION_URL_UNSUBSCRIBE}")
     private String SUBSCRIBE_URL;
+    @Value("${APLICATION_URL}")
+    private String APLICATION_URL;
     private MailService mailService;
     private EmailRepo emailRepo;
     private JobProvider jobProvider;
+    private PasswordEncoder passwordEncoder;
+
 
     @Autowired
     public MailApi(MailService mailService, EmailRepo emailRepo, JobProvider jobProvider, EmailRepo emailRepo1,
-                   JobProvider jobProvider1) {
+                   JobProvider jobProvider1, PasswordEncoder passwordEncoder) {
         this.mailService = mailService;
         this.emailRepo = emailRepo1;
         this.jobProvider = jobProvider1;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/sendMail")
-    public String sendEmailTest() throws MessagingException {
+    public void sendEmailTest() throws MessagingException {
         List<Email> emailList = emailRepo.findAll();
 
         for (Email email : emailList) {
-            Long id = email.getId();
+            String encodedId = email.getEncodedId();
             String email1 = email.getEmail();
             String city = email.getCity();
             String keywords = email.getJobPosition();
 
             List<Result> jobs = jobProvider.getJobs(keywords, city);
 
-            LocalDate today = LocalDate.now();
+            Date today = new Date();
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             String format = formatter.format(today);
 
             List<Result> collect = jobs.stream().filter(e -> e.getDate().equals(format.toString())).collect(Collectors.toList());
 
-            //todo add link with jobs
-            mailService.sendMail(email1, "New today's job offers", "New offers: " + collect.size() + SUBSCRIBE_URL + id,
-                    true);
-        }
 
-        return null;
+            String emialText1 = "New offers: " + collect.size() + "<br>" + SUBSCRIBE_URL + encodedId + "<br>";
+            String emialText2 = "Go to visit website: " + APLICATION_URL;
+            //todo add link with jobs
+            mailService.sendMail(email1, "New today's job offers", emialText1 + emialText2, true);
+        }
     }
 
     @GetMapping("/unsubscribe")
     @ResponseBody
-    public String unsubscribe(@RequestParam Long id) {
-        emailRepo.deleteById(id);
+    public String unsubscribe(@RequestParam String encodedId) {
+        emailRepo.deleteEmailByEncodedId(encodedId);
         return "unsubscribed";
     }
 

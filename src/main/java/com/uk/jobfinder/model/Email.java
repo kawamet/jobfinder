@@ -11,23 +11,47 @@ public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String encodedId;
     private String email;
     private String city;
     private String jobPosition;
     private boolean checkboxAgreement;
     private boolean checkboxOffers;
 
-    public Email(String email, String city, String jobPosition, Boolean checkboxAgreement, Boolean checkboxOffers) {
-
+    public Email(String email, String city, String jobPosition, boolean checkboxAgreement, boolean checkboxOffers) {
         this.email = email;
         this.city = city;
         this.jobPosition = jobPosition;
         this.checkboxAgreement = checkboxAgreement;
         this.checkboxOffers = checkboxOffers;
-
     }
 
     public Email() {
+    }
+
+    public String getEncodedId() {
+        return encodedId;
+    }
+
+    public String setEncodedId(String encodedId) {
+        this.encodedId = encodedId;
+        return encodedId;
+    }
+
+    public boolean isCheckboxAgreement() {
+        return checkboxAgreement;
+    }
+
+    public void setCheckboxAgreement(boolean checkboxAgreement) {
+        this.checkboxAgreement = checkboxAgreement;
+    }
+
+    public boolean isCheckboxOffers() {
+        return checkboxOffers;
+    }
+
+    public void setCheckboxOffers(boolean checkboxOffers) {
+        this.checkboxOffers = checkboxOffers;
     }
 
     public Long getId() {
@@ -69,5 +93,6 @@ public class Email {
     public Boolean getCheckboxOffers() {return  checkboxOffers; }
 
     public void setCheckboxOffers() { this.checkboxAgreement = checkboxOffers; }
+
 
 }

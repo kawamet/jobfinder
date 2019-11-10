@@ -11,6 +11,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Optional;
 
 @Route("add-email")
 @StyleSheet("/css/style.css")
@@ -22,10 +25,15 @@ public class AddEmail extends VerticalLayout {
     private Dialog dialogEmpty;
     private Checkbox checkboxAgreement;
     private Checkbox checkboxOffers;
+    private PasswordEncoder passwordEncoder;
+    private Email saveId;
+
+
 
     @Autowired
-    public AddEmail(EmailRepo emailRepo) {
+    public AddEmail(EmailRepo emailRepo, PasswordEncoder passwordEncoder) {
         this.emailRepo = emailRepo;
+        this.passwordEncoder = passwordEncoder;
 
         EmailField textFieldEmail = new EmailField("Enter your email address");
         textFieldEmail.setClearButtonVisible(true);
@@ -46,7 +54,6 @@ public class AddEmail extends VerticalLayout {
         checkboxAgreement.setValue(true);
 
 
-
         button.addClickListener(buttonClickEvent -> {
 
             if (textFieldEmail.isEmpty() || comboBoxCity.isEmpty() || comboBoxJobPosition.isEmpty() || checkboxAgreement.getValue() != true) {
@@ -55,9 +62,9 @@ public class AddEmail extends VerticalLayout {
                 dialogEmpty.open();
                 add(dialogEmpty);
             } else {
-                Email email = new Email(textFieldEmail.getValue(), comboBoxCity.getValue(), comboBoxJobPosition.getValue(),
+                Email email = new Email( textFieldEmail.getValue(), comboBoxCity.getValue(), comboBoxJobPosition.getValue(),
                         checkboxAgreement.getValue(), checkboxOffers.getValue());
-                emailRepo.save(email);
+                saveId = emailRepo.save(email);
 
                 Dialog dialog = new Dialog();
                 dialog.add(new Label("Your email has been saved to our database. We will contact you as soon as we " +
@@ -67,11 +74,19 @@ public class AddEmail extends VerticalLayout {
 
                 Button confirmButton = new Button("Ok", event -> dialog.close());
                 dialog.add(confirmButton);
-
                 dialog.open();
-            }
-        });
 
+            }
+
+            encodeId(emailRepo, passwordEncoder);
+        });
         add(textFieldEmail, comboBoxCity, comboBoxJobPosition, checkboxAgreement, checkboxOffers, button);
+    }
+
+    private void encodeId(EmailRepo emailRepo, PasswordEncoder passwordEncoder) {
+        Email firstById = this.emailRepo.findFirstById(saveId.getId());
+        String encode = passwordEncoder.encode(saveId.getId().toString());
+        firstById.setEncodedId(encode);
+        emailRepo.save(firstById);
     }
 }
