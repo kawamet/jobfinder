@@ -39,7 +39,7 @@ class MainAppView extends AppLayout {
     @Autowired
     public MainAppView(JobProvider jobProvider, EmailRepo emailRepo) {
         img = new Image("https://i.imgur.com/maqwQwL.jpg", "JavaJobFinder");
-        img.setHeight("400px");
+        img.setMaxHeight("400px");
         this.jobProvider = jobProvider;
 
         Label label = new Label("\n JavaJobFinder is the ultimate tool that will help you land your dream job as java developer " +
@@ -60,7 +60,7 @@ class MainAppView extends AppLayout {
             final Tab selectedTab = event.getSelectedTab();
             String label1 = selectedTab.getLabel();
             if (label1.equals("Find Job")) {
-                remove(img, label, jobController ,addEmail);
+                remove(img, label, jobController, addEmail);
                 addToNavbar(jobController);
             }
             if (label1.equals("Subscribe")) {
@@ -74,7 +74,6 @@ class MainAppView extends AppLayout {
         });
 
         addToDrawer(tabs);
-
     }
 }
 
