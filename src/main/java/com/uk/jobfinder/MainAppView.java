@@ -2,19 +2,12 @@ package com.uk.jobfinder;
 
 import com.uk.jobfinder.email.AddEmail;
 import com.uk.jobfinder.email.EmailRepo;
-import com.uk.jobfinder.model.Result;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
@@ -22,14 +15,12 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-import java.util.Set;
-
 @StyleSheet("/css/style.css")
 @Route("app-main-view")
 @Viewport("width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover")
 @PWA(name = "JavaJobFinder", shortName = "OurApp")
 class MainAppView extends AppLayout {
+
     JobProvider jobProvider;
     AddEmail addEmail;
     JobController jobController;
