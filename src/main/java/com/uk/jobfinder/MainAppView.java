@@ -41,23 +41,23 @@ class MainAppView extends AppLayout {
 
     @Autowired
     public MainAppView(JobProvider jobProvider, EmailRepo emailRepo) {
+        this.jobProvider = jobProvider;
+        jobController = new JobController(jobProvider);
+        addEmail = new AddEmail(emailRepo);
         img = new Image("https://i.imgur.com/maqwQwL.jpg", "JavaJobFinder");
         img.setMaxHeight("400px");
         imgLupa = new Image("https://i.imgur.com/D5Fff4j.jpg", "JavaJobFinder");
-        imgLupa.setMaxHeight("70px");
-        this.jobProvider = jobProvider;
+        imgLupa.setMaxHeight("50px");
 
         label = new Label("\n JavaJobFinder is the ultimate tool that will help you land your dream job as java developer " +
                 "on any level you want. \n" +
                 "We use best job search available and we promise to deliver the most suitable job offers directly to your inbox. So \n" +
                 "do not hesitate and subscribe to our newsletter today. ");
 
-        setContent(horizontalLayout);
         horizontalLayout = new HorizontalLayout();
         horizontalLayout.add(img, label);
         addToNavbar(new DrawerToggle(), imgLupa);
-        jobController = new JobController(jobProvider);
-        addEmail = new AddEmail(emailRepo);
+        setContent(horizontalLayout);
 
         Tabs tabs = new Tabs(new Tab("Main"), new Tab("Find Job"), new Tab("Subscribe"), new Tab("API documentation"));
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
@@ -75,7 +75,6 @@ class MainAppView extends AppLayout {
             if (label1.equals("Main")) {
                 remove(jobController, addEmail, horizontalLayout);
                 setContent(horizontalLayout);
-                //setContent(label);
             }
         });
 
