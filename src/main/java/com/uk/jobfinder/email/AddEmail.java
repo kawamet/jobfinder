@@ -39,7 +39,7 @@ public class AddEmail extends VerticalLayout {
         comboBoxJobPosition = new ComboBox<>("Select job position");
         comboBoxJobPosition.setItems("Senior Java", "Java", "Junior Java", "Graduate Java", "Academy Java");
 
-        Button button = new Button("Save!");
+        Button button = new Button("Save");
 
         button.addClickListener(buttonClickEvent -> {
 
@@ -59,7 +59,7 @@ public class AddEmail extends VerticalLayout {
                 dialog.setWidth("250px");
                 dialog.setHeight("150px");
 
-                Button confirmButton = new Button("Fantastic!", event -> dialog.close());
+                Button confirmButton = new Button("Ok", event -> dialog.close());
                 dialog.add(confirmButton);
 
                 dialog.open();

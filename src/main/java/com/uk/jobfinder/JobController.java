@@ -3,6 +3,7 @@ package com.uk.jobfinder;
 import com.uk.jobfinder.model.Result;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Anchor;
@@ -17,8 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Set;
 
-
 @Route("show-all")
+@StyleSheet("/css/style.css")
 public class JobController extends VerticalLayout {
 
     JobProvider jobProvider;
@@ -30,7 +31,6 @@ public class JobController extends VerticalLayout {
     ComboBox<String> comboBoxJob;
     Button buttonSubmit;
     Anchor anchorSubscribe;
-
 
     @Autowired
     public JobController(JobProvider jobProvider) {
@@ -47,7 +47,7 @@ public class JobController extends VerticalLayout {
         buttonSubmit.setIconAfterText(true);
 
         anchorSubscribe = new Anchor("/add-email");
-        anchorSubscribe.setText("Subscribe!");
+        anchorSubscribe.setText("Subscribe to our newsletter");
 
 
         final int[] count = {0};
@@ -95,5 +95,4 @@ public class JobController extends VerticalLayout {
             count[0]++;
         }
     }
-
 }
