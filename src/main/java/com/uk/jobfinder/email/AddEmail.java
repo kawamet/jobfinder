@@ -20,6 +20,8 @@ public class AddEmail extends VerticalLayout {
     private ComboBox<String> comboBoxCity;
     private ComboBox<String> comboBoxJobPosition;
     private Dialog dialogEmpty;
+    private Checkbox checkboxAgreement;
+    private Checkbox checkboxOffers;
 
     @Autowired
     public AddEmail(EmailRepo emailRepo) {
@@ -28,9 +30,9 @@ public class AddEmail extends VerticalLayout {
         EmailField textFieldEmail = new EmailField("Enter your email address");
         textFieldEmail.setClearButtonVisible(true);
         textFieldEmail.setErrorMessage("Please enter a valid email address");
-        Checkbox checkboxAgreement = new Checkbox();
+        checkboxAgreement = new Checkbox();
         checkboxAgreement.setLabel("I declare that I have read and understood JavaJobFinder privacy policy.");
-        Checkbox checkboxOffers = new Checkbox();
+        checkboxOffers = new Checkbox();
         checkboxOffers.setLabel(" I consent to receive promotional offers from JavaJobFinder.");
 
         comboBoxCity = new ComboBox<>("Select a city");
@@ -40,10 +42,14 @@ public class AddEmail extends VerticalLayout {
         comboBoxJobPosition.setItems("Senior Java", "Java", "Junior Java", "Graduate Java", "Academy Java");
 
         Button button = new Button("Save");
+        checkboxOffers.setValue(true);
+        checkboxAgreement.setValue(true);
+
+
 
         button.addClickListener(buttonClickEvent -> {
 
-            if (textFieldEmail.isEmpty() || comboBoxCity.isEmpty() || comboBoxJobPosition.isEmpty()) {
+            if (textFieldEmail.isEmpty() || comboBoxCity.isEmpty() || comboBoxJobPosition.isEmpty() || checkboxAgreement.getValue() != true) {
                 dialogEmpty = new Dialog();
                 dialogEmpty.add(new Label("Field/s cannot be empty!!!"));
                 dialogEmpty.open();

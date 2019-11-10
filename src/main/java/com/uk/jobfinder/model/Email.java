@@ -14,8 +14,8 @@ public class Email {
     private String email;
     private String city;
     private String jobPosition;
-    private Boolean checkboxAgreement;
-    private Boolean checkboxOffers;
+    private boolean checkboxAgreement;
+    private boolean checkboxOffers;
 
     public Email(String email, String city, String jobPosition, Boolean checkboxAgreement, Boolean checkboxOffers) {
 
