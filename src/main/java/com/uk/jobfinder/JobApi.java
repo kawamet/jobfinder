@@ -46,7 +46,8 @@ public class JobApi {
             Long count = jobs.stream().filter(e -> e.getJobDescription().toLowerCase().contains(technology)).count();
             countTech.put(technology, count);
         }
-        Map<String, Long> collect = countTech.entrySet().stream().filter(e -> e.getValue() > 0).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+        Map<String, Long> collect = countTech.entrySet().stream().filter(e -> e.getValue() > 0)
+                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
 
         return collect;
     }
