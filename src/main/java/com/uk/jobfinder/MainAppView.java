@@ -15,6 +15,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 @StyleSheet("/css/style.css")
 @Route("app-main-view")
 @Viewport("width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover")
