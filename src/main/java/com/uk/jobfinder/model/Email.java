@@ -27,6 +27,9 @@ public class Email {
 
     }
 
+    public Email() {
+    }
+
     public Long getId() {
         return id;
     }
