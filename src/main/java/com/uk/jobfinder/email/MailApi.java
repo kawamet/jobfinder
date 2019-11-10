@@ -26,19 +26,12 @@ public class MailApi {
     private JobProvider jobProvider;
 
     @Autowired
-    public MailApi(MailService mailService, EmailRepo emailRepo, JobProvider jobProvider, EmailRepo emailRepo1, JobProvider jobProvider1) {
+    public MailApi(MailService mailService, EmailRepo emailRepo, JobProvider jobProvider, EmailRepo emailRepo1,
+                   JobProvider jobProvider1) {
         this.mailService = mailService;
         this.emailRepo = emailRepo1;
         this.jobProvider = jobProvider1;
     }
-
- /*    @GetMapping("/sendMail")
-     public String sendMail() throws MessagingException {
-         mailService.sendMail("carolinawanat@gmail.com",
-                 "Wygrałeś",
-                 "<b>10zł</b><br>:P", true);
-         return "wysłano";
-     }*/
 
     @GetMapping("/sendMail")
     public String sendEmailTest() throws MessagingException {
@@ -59,7 +52,8 @@ public class MailApi {
             List<Result> collect = jobs.stream().filter(e -> e.getDate().equals(format.toString())).collect(Collectors.toList());
 
             //todo add link with jobs
-            mailService.sendMail(email1, "New today's job offers", "New offers: " + collect.size() + SUBSCRIBE_URL + id, true);
+            mailService.sendMail(email1, "New today's job offers", "New offers: " + collect.size() + SUBSCRIBE_URL + id,
+                    true);
         }
 
         return null;
