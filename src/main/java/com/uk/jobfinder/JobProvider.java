@@ -1,6 +1,5 @@
 package com.uk.jobfinder;
 
-
 import com.uk.jobfinder.model.Result;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,7 +14,6 @@ import java.util.List;
 @RestController
 public class JobProvider {
 
-
     //    @EventListener(ApplicationReadyEvent.class)
     public List<Result> getJobs(String keywords, String location) {
 
@@ -25,7 +23,7 @@ public class JobProvider {
         return getResultsRestTemplate(URL);
     }
 
-    public List<Result> getAllJobs(){
+    public List<Result> getAllJobs() {
         String URL = "https://www.reed.co.uk/api/1.0/search?keywords=java&location=london&distancefromlocation=5";
 
         return getResultsRestTemplate(URL);
