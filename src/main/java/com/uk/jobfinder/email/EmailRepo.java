@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmailRepo extends JpaRepository<Email, Long> {
 
-    public boolean deleteEmailByEncodedId(String encodedId);
     public Email findFirstById(Long id);
 
 

@@ -69,7 +69,8 @@ public class MailApi {
     @GetMapping("/unsubscribe")
     @ResponseBody
     public String unsubscribe(@RequestParam String encodedId) {
-        emailRepo.deleteEmailByEncodedId(encodedId);
+        Email email = emailRepo.findAll().stream().filter(e -> e.getEncodedId().equals(encodedId)).collect(Collectors.toList()).get(0);
+        emailRepo.deleteById(email.getId());
         return "unsubscribed";
     }
 
