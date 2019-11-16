@@ -41,7 +41,7 @@ public class JobController extends VerticalLayout {
         comboBoxCity.setItems("London", "Birmingham", "Manchester", "Glasgow", "Newcastle", "Sheffield", "Liverpool", "Leeds");
 
         comboBoxJob = new ComboBox<String>("Find");
-        comboBoxJob.setItems("Java", "Junior Java", "Senior Java");
+        comboBoxJob.setItems("Senior Java", "Java", "Junior Java", "Graduate Java");
 
         buttonSubmit = new Button("Submit", new Icon(VaadinIcon.SELECT));
         buttonSubmit.setIconAfterText(true);

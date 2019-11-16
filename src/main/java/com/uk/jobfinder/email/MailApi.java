@@ -60,7 +60,7 @@ public class MailApi {
 
 
             String emialText1 = "New offers: " + collect.size() + "<br>" + SUBSCRIBE_URL + encodedId + "<br>";
-            String emialText2 = "Go to visit website: " + APLICATION_URL;
+            String emialText2 = "Visit website: " + APLICATION_URL;
             //todo add link with jobs
             mailService.sendMail(email1, "New today's job offers", emialText1 + emialText2, true);
         }

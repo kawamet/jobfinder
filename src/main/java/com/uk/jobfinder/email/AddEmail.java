@@ -44,10 +44,10 @@ public class AddEmail extends VerticalLayout {
         checkboxOffers.setLabel(" I consent to receive promotional offers from JavaJobFinder.");
 
         comboBoxCity = new ComboBox<>("Select a city");
-        comboBoxCity.setItems("London", "Birmingham", "Manchester", "Glasgow", "Newcastle", "Sheffield", "Liverpool", "Leeds", "Wimbledon");
+        comboBoxCity.setItems("London", "Birmingham", "Manchester", "Glasgow", "Newcastle", "Sheffield", "Liverpool", "Leeds");
 
         comboBoxJobPosition = new ComboBox<>("Select job position");
-        comboBoxJobPosition.setItems("Senior Java", "Java", "Junior Java", "Graduate Java", "Academy Java");
+        comboBoxJobPosition.setItems("Senior Java", "Java", "Junior Java", "Graduate Java");
 
         Button button = new Button("Save");
         checkboxOffers.setValue(true);
