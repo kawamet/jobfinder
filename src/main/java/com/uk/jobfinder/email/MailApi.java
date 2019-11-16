@@ -59,7 +59,7 @@ public class MailApi {
             List<Result> collect = jobs.stream().filter(e -> e.getDate().equals(format.toString())).collect(Collectors.toList());
 
 
-            String emialText1 = "New offers: " + collect.size() + "<br>" + SUBSCRIBE_URL + encodedId + "<br>";
+            String emialText1 = "New offers: " + collect.size() + "<br>"+ "Unsubscribe: " + SUBSCRIBE_URL + encodedId + "<br>";
             String emialText2 = "Visit website: " + APLICATION_URL;
             //todo add link with jobs
             mailService.sendMail(email1, "New today's job offers", emialText1 + emialText2, true);
