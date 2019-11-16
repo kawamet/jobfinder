@@ -14,6 +14,7 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
@@ -37,7 +38,7 @@ class MainAppView extends AppLayout {
     public MainAppView(JobProvider jobProvider, EmailRepo emailRepo) {
         this.jobProvider = jobProvider;
         jobController = new JobController(jobProvider);
-        addEmail = new AddEmail(emailRepo, passwordEncoder);
+        addEmail = new AddEmail(emailRepo);
         img = new Image("https://i.imgur.com/maqwQwL.jpg", "JavaJobFinder");
         img.setMaxHeight("400px");
         imgLupa = new Image("https://i.imgur.com/BgySz0z.png", "JavaJobFinder");

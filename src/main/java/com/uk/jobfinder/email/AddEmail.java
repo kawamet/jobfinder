@@ -11,6 +11,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
@@ -31,9 +32,9 @@ public class AddEmail extends VerticalLayout {
 
 
     @Autowired
-    public AddEmail(EmailRepo emailRepo, PasswordEncoder passwordEncoder) {
+    public AddEmail(EmailRepo emailRepo) {
         this.emailRepo = emailRepo;
-        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = new BCryptPasswordEncoder();
 
         EmailField textFieldEmail = new EmailField("Enter your email address");
         textFieldEmail.setClearButtonVisible(true);
@@ -85,6 +86,7 @@ public class AddEmail extends VerticalLayout {
 
     private void encodeId(EmailRepo emailRepo, PasswordEncoder passwordEncoder) {
         Email firstById = this.emailRepo.findFirstById(saveId.getId());
+
         String encode = passwordEncoder.encode(saveId.getId().toString());
         firstById.setEncodedId(encode);
         emailRepo.save(firstById);
