@@ -10,10 +10,26 @@ JavaJobFinder - job searching app.
 
 ## General info:
 
-This app was created as our final project in year-long Java Course with Software Development Academy 
+This application was created as our final project in year-long Java Course with Software Development Academy 
 @West London University. We used reed.co.uk API as search engine that delivers java job vacancies in 
 biggest UK cities and delivers it to emails provided by our users. JavaJobSearch was created with Java version 8, 
-Spring Boot 2.2.0 and MySQL as backend and Vaadin as frontend. 
+Spring Boot 2.2.0 and MySQL (backend side) and Vaadin (frontend side of app). 
+
+## How  to use our API:
+
+In order to use our API in your own projects please go here: 
+
+https://javajobfinder.herokuapp.com/api/jobs (access to all java jobs available) with below parameters:
+* city (required)
+* keywords (required)
+* date (not required)
+
+or here: 
+
+https://javajobfinder.herokuapp.com/api/techsum 
+(where you can get all information about most wanted skills on market) with below parameters:
+* city (required)
+* keywords (required)
 
 ## Technologies:
 
