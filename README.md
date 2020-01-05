@@ -2,6 +2,9 @@
 
 JavaJobFinder - job searching app. 
 
+[Open application](https://javajobfinder.herokuapp.com/app-main-view)
+
+
 ## Table of contents:
 
 * [General info](#general-info)
